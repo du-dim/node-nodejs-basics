@@ -6,27 +6,24 @@ let linkFile1 = path.join(__dirname, 'files');
 let linkFile2 = path.join(__dirname, 'files_copy');
 
 export const copy = async () => {
-    try {		
+  try {		
 		if (!fs.existsSync(linkFile1) || fs.existsSync(linkFile2)) throw new Error('FS operation failed');  
-        await copyDir(linkFile1, linkFile2)
+    await copyDir(linkFile1, linkFile2)
 	} catch (err) {
-		console.log(err.message);
+		console.error(`${err}`);
 	}
 }
 
 async function copyDir(a, b) {
-	const files = await fsp.readdir(a, { withFileTypes: true })
+	const files = await fsp.readdir(a, { withFileTypes: true });
 	await fsp.mkdir(b, { recursive: true });
-	files.forEach(f => {
-		if (f.isFile()) {
-        let myReadStream = fs.createReadStream(path.join(a, f.name));
-		let myWriteStream = fs.createWriteStream(path.join(b, f.name));
-		myReadStream.pipe(myWriteStream);
-		myReadStream.on('error', (err) => console.log(err.message));
-		myWriteStream.on('error', (err) => console.log(err.message));
+	files.forEach(async (f) => {
+		if (f.isFile()) {    
+		const data = await fsp.readFile(path.join(a, f.name), 'utf8');
+		await fsp.writeFile(path.join(b, f.name), data);		
     } else  {
 			copyDir(path.join(a, f.name), path.join(b, f.name)); 
 		}           
-  })
+  });
 }
 copy();
