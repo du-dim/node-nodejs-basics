@@ -6,11 +6,11 @@ const linkFile1 = path.join(__dirname, 'files', 'wrongFilename.txt');
 const linkFile2 = path.join(__dirname, 'files', 'properFilename.md');
 
 export const rename = async () => {
-    try {		
+  try {		
 		if (!fs.existsSync(linkFile1) || fs.existsSync(linkFile2)) throw new Error('FS operation failed');  
-        await fsp.rename(linkFile1, linkFile2);
+    await fsp.rename(linkFile1, linkFile2);
 	} catch (err) {
-		console.log(err.message);
+		console.log(`${err}`);
 	}
 };
 rename();

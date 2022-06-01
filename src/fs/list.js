@@ -7,7 +7,7 @@ const arrFileName = [];
 
 export const list = async () => {
     try {		
-		if (!fs.existsSync(linkFile)) throw new Error('FS operation failed');
+	    if (!fs.existsSync(linkFile)) throw new Error('FS operation failed');
         const data = await fsp.opendir(linkFile);
         for await (const file of data) {
             arrFileName.push(file.name);
@@ -15,7 +15,7 @@ export const list = async () => {
         console.log(arrFileName);
                 
 	} catch (err) {
-		console.log(err.message);
+		console.log(`${err}`);
 	}
 };
 list();

@@ -5,11 +5,11 @@ const fsp = fs.promises;
 const linkFile = path.join(__dirname, 'files', 'fileToRemove.txt');
 
 export const remove = async () => {
-    try {		
+  try {		
 		if (!fs.existsSync(linkFile)) throw new Error('FS operation failed');
-        await fsp.rm(linkFile, { recursive: true });
+    await fsp.rm(linkFile, { recursive: true });
 	} catch (err) {
-		console.log(err.message);
+		console.log(`${err}`);
 	} 
 };
 remove();
