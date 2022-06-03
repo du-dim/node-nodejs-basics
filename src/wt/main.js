@@ -14,13 +14,11 @@ export const performCalculations = async () => {
 
 const promise = (index) => new Promise((resolve, reject) => {
     const worker = new Worker(linkFile, { workerData: 10 + index});             
-    worker.on('message', msg => { 
-        const obj = {status: 'resolve', data: msg};  
-        resolve(obj);    
+    worker.on('message', msg => {           
+        resolve({status: 'resolve', data: msg});    
     }); 
-    worker.on('error', err => { 
-        const obj = {status: 'error', data: null}; 
-        resolve(obj);                                                 
+    worker.on('error', err => {         
+        resolve({status: 'error', data: null});                                                 
     });  
 })  
 
