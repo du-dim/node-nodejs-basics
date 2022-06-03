@@ -9,7 +9,7 @@ export const performCalculations = async () => {
     const arrPromise = cpus.map((_,i) => promise(i));
     const arrResult = [];
     await Promise.all(arrPromise).then(results => results.forEach(res => arrResult.push(res)));
-    console.log(arrResult);
+    return arrResult;
 };
 
 const promise = (index) => new Promise((resolve, reject) => {
@@ -20,8 +20,8 @@ const promise = (index) => new Promise((resolve, reject) => {
     worker.on('error', err => {         
         resolve({status: 'error', data: null});                                                 
     });  
-})  
+});
 
-performCalculations();
+console.log(await performCalculations());
 
             
