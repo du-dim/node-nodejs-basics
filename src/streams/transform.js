@@ -6,7 +6,7 @@ const writable = process.stdout;
 const myTransform = new Transform({
     transform(chunk, encoding, callback) {
         const chunkData = chunk.toString();
-        const chunkTransform = chunkData; // doesn't transform
+        const chunkTransform = chunkData.split('').reverse().join(''); // doesn't transform
         callback(null, chunkTransform);        
     }
 });
