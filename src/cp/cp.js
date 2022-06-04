@@ -13,10 +13,7 @@ export const spawnChildProcess = async (args) => {
     });
     child.on('close', () => {
         process.exit();
-    });  
-    child.on('', () => {
-        process.exit();
-    });                
+    });                    
 };
 
 spawnChildProcess(['Test1', 'Test2', 'Test3']);
