@@ -7,13 +7,11 @@ const myTransform = new Transform({
     transform(chunk, encoding, callback) {
         const chunkData = chunk.toString();
         const chunkTransform = chunkData; // doesn't transform
-        callback(null, chunkTransform);
-        process.exit();
+        callback(null, chunkTransform);        
     }
 });
 
 export const transform = async () => {
-    pipeline(readable, myTransform, writable, err => console.error(`${err}`));
-    
+    pipeline(readable, myTransform, writable, err => console.error(`${err}`));    
 };
 transform();
