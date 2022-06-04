@@ -5,9 +5,9 @@ const writable = process.stdout;
 
 const myTransform = new Transform({
     transform(chunk, encoding, callback) {
-        const chunkData = chunk.toString();
+        const chunkData = chunk.toString().trim();
         const chunkTransform = chunkData.split('').reverse().join(''); 
-        callback(null, chunkTransform);        
+        callback(null, chunkTransform + '\n');        
     }
 });
 

@@ -32,3 +32,6 @@ const createMyServer = createServer((_, res) => {
 });
 
 export { unknownObject, createMyServer };
+
+console.log(unknownObject);
+createMyServer.listen(5000, () => console.log('Server started on port 5000'));
