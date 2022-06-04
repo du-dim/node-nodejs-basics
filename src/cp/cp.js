@@ -6,7 +6,7 @@ export const spawnChildProcess = async (args) => {
     const child = spawn('node ' + linkFile, args, {shell: true});
     
     child.stdout.on('data', data => {        
-        console.log(`${data}`);            
+        console.log(data.toString().trim());            
     }); 
     process.stdin.on('data', data => {                     
         child.stdin.write(data);        
